@@ -105,6 +105,19 @@ class Mancala:
                         add_count = 0
 
             if str(self._board[0:6]) == str(end_game) or str(self._board[7:13]) == str(end_game):
+                p1_results = 0
+                p2_results = 0
+
+                for i in self._board[:7]:
+                    p1_results += i
+                self._board[6] = p1_results
+                self._board[:6] = [0, 0, 0, 0, 0, 0]
+
+                for i in self._board[7:13]:
+                    p2_results += i
+
+                self._board[7:12] = [0, 0, 0, 0, 0, 0]
+                self._board[13] = p2_results
                 self._playing = False
 
             return self._board
@@ -134,18 +147,18 @@ class Player:
         return self._name
 
 
-# game = Mancala()
-# player1 = game.create_player("Lily")
-# player2 = game.create_player("Lucy")
-# print("turn 1" + str(game.play_game(1, 1)))
-# print("turn 2" + str(game.play_game(1, 2)))
-# print("turn 3" + str(game.play_game(1, 3)))
-# print("turn 4" + str(game.play_game(1, 4)))
-# print("turn 5" + str(game.play_game(1, 5)))
-# print("turn 6" + str(game.play_game(1, 6)))
-# game.print_board()
-# game.return_winner()
-#
+game = Mancala()
+player1 = game.create_player("Lily")
+player2 = game.create_player("Lucy")
+print("turn 1" + str(game.play_game(1, 1)))
+print("turn 2" + str(game.play_game(1, 2)))
+print("turn 3" + str(game.play_game(1, 3)))
+print("turn 4" + str(game.play_game(1, 4)))
+print("turn 5" + str(game.play_game(1, 5)))
+print("turn 6" + str(game.play_game(1, 6)))
+game.print_board()
+game.return_winner()
+
 # game = Mancala()
 # player1 = game.create_player("Lily")
 # player2 = game.create_player("Lucy")
