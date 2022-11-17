@@ -120,7 +120,7 @@ class Mancala:
                 self._board[13] = p2_results
                 self._playing = False
 
-            return self._board
+            return self._board[:13]
 
     """Takes no parameter, prints the outcome of the game"""
 
