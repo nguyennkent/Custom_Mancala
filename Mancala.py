@@ -147,17 +147,17 @@ class Player:
         return self._name
 
 
-game = Mancala()
-player1 = game.create_player("Lily")
-player2 = game.create_player("Lucy")
-print("turn 1" + str(game.play_game(1, 1)))
-print("turn 2" + str(game.play_game(1, 2)))
-print("turn 3" + str(game.play_game(1, 3)))
-print("turn 4" + str(game.play_game(1, 4)))
-print("turn 5" + str(game.play_game(1, 5)))
-print("turn 6" + str(game.play_game(1, 6)))
-game.print_board()
-game.return_winner()
+# game = Mancala()
+# player1 = game.create_player("Lily")
+# player2 = game.create_player("Lucy")
+# print("turn 1" + str(game.play_game(1, 1)))
+# print("turn 2" + str(game.play_game(1, 2)))
+# print("turn 3" + str(game.play_game(1, 3)))
+# print("turn 4" + str(game.play_game(1, 4)))
+# print("turn 5" + str(game.play_game(1, 5)))
+# print("turn 6" + str(game.play_game(1, 6)))
+# game.print_board()
+# game.return_winner()
 
 # game = Mancala()
 # player1 = game.create_player("Lily")
