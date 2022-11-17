@@ -132,11 +132,11 @@ class Mancala:
             p2_store = self._board[13]
 
             if p1_store == p2_store:
-                print("It's a tie")
+                return "It's a tie"
             if p1_store > p2_store:
-                print("Winner is player 1: " + self._player_list[0].get_name())
+                return "Winner is player 1: " + self._player_list[0].get_name()
             if p2_store > p1_store:
-                print("Winner is player 2: " + self._player_list[1].get_name())
+                return "Winner is player 2: " + self._player_list[1].get_name()
 
 
 class Player:
