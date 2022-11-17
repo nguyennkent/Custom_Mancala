@@ -38,7 +38,7 @@ class Mancala:
             return "Invalid number for pit index"
 
         if not self._playing:
-            print("Game is ended")
+            return "Game is ended"
 
         while self._playing:
             if player == 1:
