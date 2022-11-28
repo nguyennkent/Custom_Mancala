@@ -1,31 +1,28 @@
 # Author: Kent Nguyen
 # GitHub username: nguyennkent
 # Date: December 4 2022
-# Description:
-
+# Description: Custom implementation of a Mancala game with two special rules
 
 end_game = [0, 0, 0, 0, 0, 0]
-
 special_rule_p1 = {0: 12, 1: 11, 2: 10, 3: 9, 4: 8, 5: 7}
 special_rule_p2 = {12: 0, 11: 1, 10: 2, 9: 3, 8: 4, 7: 5}
 
-
 class Mancala:
+    """Mancala class to represent Mancala game"""
+
     def __init__(self):
         self._player_list = []
         self._board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
         # index 6 and index 13 are player stores
         self._playing = True
 
-    """Successfully takes the player’s name as a string argument and returns the Player object."""
-
     def create_player(self, name):
+        """Creates a player with given name"""
         self._player_list.append(Player(name))
         return Player(name)
 
-    """"Takes no parameter and will print the current board information in this READme format"""
-
     def print_board(self):
+        """"Takes no parameter and will print the current board information in READme format"""
         print("player 1:")
         print("store: " + str(self._board[6]))
         print(self._board[0:6])
@@ -34,6 +31,7 @@ class Mancala:
         print(self._board[7:13])
 
     def play_game(self, player, pit):
+        """Make indicated move based on player and pit index"""
         if pit > 6 or pit <= 0:
             return "Invalid number for pit index"
 
@@ -42,15 +40,12 @@ class Mancala:
 
         while self._playing:
             if player == 1:
-                # get seed count for move counts
-                seed_count = self._board[pit - 1]
-                # set seed hole to 0
-                self._board[pit - 1] = 0
-                # where to add
-                add_count = pit
+                seed_count = self._board[pit - 1]  # Get seed count for move counts
+                self._board[pit - 1] = 0  # Set seed hole to 0
+                add_count = pit  # Where to add next seed
 
                 while seed_count != 0:
-                    if seed_count == 1:
+                    if seed_count == 1:  # Special Rule Condition
                         if self._board[add_count] == 0:
                             if add_count in range(0, 6):
                                 index_rule = special_rule_p1.get(add_count)
@@ -64,25 +59,20 @@ class Mancala:
                     add_count += 1
                     seed_count -= 1
 
-                    # ends in store
-                    if seed_count == 0 and add_count == 7:
+                    if seed_count == 0 and add_count == 7:  # End in store case
                         print("player 1 take another turn")
 
-                    # start from front again
-                    if add_count > 12:
+                    if add_count > 12:  # Start from front again
                         add_count = 0
 
             if player == 2:
                 pit += 6
-                # get seed count for move counts
-                seed_count = self._board[pit]
-                # set seed hole to 0
-                self._board[pit] = 0
-                # where to add
-                add_count = pit + 1
+                seed_count = self._board[pit]  # Get seed count for move counts
+                self._board[pit] = 0  # Set seed hole to 0
+                add_count = pit + 1  # Where to add next seed
 
                 while seed_count != 0:
-                    if seed_count == 1:
+                    if seed_count == 1:  # Special Rule Condition
                         if self._board[add_count] == 0:
                             if add_count in range(7, 13):
                                 index_rule = special_rule_p2.get(add_count)
@@ -96,24 +86,22 @@ class Mancala:
                     add_count += 1
                     seed_count -= 1
 
-                    # ends in store
-                    if seed_count == 0 and add_count == 14:
+                    if seed_count == 0 and add_count == 14:  # End in store case
                         print("player 2 take another turn")
 
-                    # start from front again
-                    if add_count > 13:
+                    if add_count > 13:  # Start from front again
                         add_count = 0
 
-            if str(self._board[0:6]) == str(end_game) or str(self._board[7:13]) == str(end_game):
+            if str(self._board[0:6]) == str(end_game) or str(self._board[7:13]) == str(end_game):  # Game ends
                 p1_results = 0
                 p2_results = 0
 
-                for i in self._board[:7]:
+                for i in self._board[:7]:  # Sum player 1 board for score
                     p1_results += i
                 self._board[6] = p1_results
                 self._board[:6] = [0, 0, 0, 0, 0, 0]
 
-                for i in self._board[7:13]:
+                for i in self._board[7:13]:  # Sum player 2 board for score
                     p2_results += i
 
                 self._board[7:12] = [0, 0, 0, 0, 0, 0]
@@ -122,9 +110,8 @@ class Mancala:
 
             return self._board[:14]
 
-    """Takes no parameter, prints the outcome of the game"""
-
     def return_winner(self):
+        """Prints outcome of the game"""
         if self._playing:
             return "Game has not ended"
         else:
@@ -140,34 +127,10 @@ class Mancala:
 
 
 class Player:
+    """Player class to represent Player object inside Mancala game"""
     def __init__(self, name):
         self._name = name
 
     def get_name(self):
+        """Get method for Player name"""
         return self._name
-
-
-# game = Mancala()
-# player1 = game.create_player("Lily")
-# player2 = game.create_player("Lucy")
-# print("turn 1" + str(game.play_game(1, 1)))
-# print("turn 2" + str(game.play_game(1, 2)))
-# print("turn 3" + str(game.play_game(1, 3)))
-# print("turn 4" + str(game.play_game(1, 4)))
-# print("turn 5" + str(game.play_game(1, 5)))
-# print("turn 6" + str(game.play_game(1, 6)))
-# game.print_board()
-# game.return_winner()
-
-# game = Mancala()
-# player1 = game.create_player("Lily")
-# player2 = game.create_player("Lucy")
-# print("turn 1" + str(game.play_game(1, 3)))
-# print("turn 2" + str(game.play_game(1, 1)))
-# print("turn 3" + str(game.play_game(2, 3)))
-# print("turn 4" + str(game.play_game(2, 4)))
-# print("turn 5" + str(game.play_game(1, 2)))
-# print("turn 6" + str(game.play_game(2, 2)))
-# print("turn 7" + str(game.play_game(1, 1)))
-# game.print_board()
-# print(game.return_winner())
